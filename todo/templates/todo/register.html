@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; 
+            background: linear-gradient(135deg, #6e7dff, #00bcd4); 
+            color: white;
+            padding-top: 60px; 
+        }
+
+        .navbar {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; 
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 20px;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+            margin-top: 50px;
+            transition: all 0.3s ease;
+            color: gray;
+            text-align: left;
+        }
+
+        .form-container:hover {
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px); 
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form {
+            display: inline-block;
+            width: 100%;
+        }
+
+        .button-group {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%; 
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+        }
+
+        button[type="submit"]:hover {
+            opacity: 0.9;
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 100px;
+            }
+
+            .form-container {
+                width: 90%;
+                margin-top: 20px;
+            }
+
+            .navbar a {
+                padding: 8px;
+                margin: 0 10px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar a {
+                font-size: 14px;
+            }
+
+            .form-container {
+                width: 90%;
+                margin-top: 20px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <b style="text-align: left; color: tomato;">Django Assignment</b>&nbsp;&nbsp;<br><br>
+        <a href="#">Radhika Thakkar= </a> | <a href="#">UPES =</a> | <a href="#">thakkarradhika13@gmail.com=</a>
+        <br><br>
+        <marquee style="background-color: tomato; font-weight: bold;">The primary focus is on backend logic, with robust handling of data interactions using Django’s ORM (Object-Relational Mapping) for SQL queries.</marquee>
+    </div>
+
+    <div class="form-container">
+        <h2>Register</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="button-group">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+
+</html>

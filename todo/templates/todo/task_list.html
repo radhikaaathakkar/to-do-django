@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1E90FF, #00BFFF); 
+            color: white;
+            padding-top: 60px;
+        }
+
+        .navbar {
+            background-color: #333;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 0 20px;
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        .task-list-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            margin-top: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .task-list-container:hover {
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #fff;
+            color: #333;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        li:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .status {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        .status.pending {
+            color: #FF6347; 
+        }
+
+        .status.completed {
+            color: #32CD32;
+        }
+
+        .button-link {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .button-link:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 100px;
+            }
+
+            .task-list-container {
+                width: 90%;
+                margin-top: 20px;
+            }
+
+            .navbar a {
+                padding: 8px;
+                margin: 0 10px;
+            }
+
+            li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .button-link {
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 20px;
+            }
+
+            li {
+                padding: 12px;
+            }
+
+            .navbar a {
+                font-size: 14px;
+            }
+
+            .button-link {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <b style="text-align: left; color: tomato;">Task Management System</b>&nbsp;&nbsp;<br><br>
+        <a href="#">Radhika Thakkar</a> | <a href="#">UPES</a> | <a href="#">thakkarradhika13@gmail.com</a>
+        <br><br>
+        <marquee style="background-color: tomato; font-weight: bold;">Keep track of your tasks efficiently and mark them as completed once done!</marquee>
+    </div>
+
+    <div class="task-list-container">
+        <h2>Task List</h2>
+        <ul>
+            {% for task in tasks %}
+            <li>
+                <span>{{ task.title }}</span>
+                <span class="status {% if task.completed %}completed{% else %}pending{% endif %}">
+                    {% if task.completed %}Completed{% else %}Pending{% endif %}
+                </span>
+                {% if not task.completed %}
+                <a href="{% url 'complete_task' task.id %}" class="button-link">Mark as Complete</a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'add_task' %}" class="button-link">Add New Task</a>
+    </div>
+
+</body>
+
+</html>
